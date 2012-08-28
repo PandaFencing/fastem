@@ -50,4 +50,10 @@ please donate us, help us improve this project.
 
 [![donate via paypal](https://www.paypal.com/en_US/i/btn/x-click-but04.gif "donate via paypal")](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=netroby%40netroby%2ecom&lc=US&item_name=netroby%2ecom&amount=0%2e99&currency_code=USD&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHostedGuest "donate via paypal")
 
+变更记录
+--------
+
+### 2012.08.29 ###
+
+Zend Framework将发布2.0,故fastem也将采用 zend framework 2.0来开发
 

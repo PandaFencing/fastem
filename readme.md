@@ -15,17 +15,9 @@ FastEM 广告管理系统许可协议
 --------------------------
 
 
-将采用GPL V3协议和商业许可证发行，参见LICENSE.txt及附带的GPLV3.txt。
+FastEM 广告管理系统采用了New BSD许可协议
 
-FastEM 广告管理系统采用了Zend Framework框架，所以附带了一份BSD许可协议，参见ZendFramework_LICENSE.txt。
-
-商业许可证参见 BIZ_LICENSE.txt ，购买商业许可证请联系netroby@netroby.com
-
-用户可以自由选择一种许可证。
-
-商业许可证需支付一定费用，可无限制应用，无限制修改代码，并且无需公开修改后的代码。
-
-开源许可证，不收取费用，要求共享任何修改后的代码，同时我们接受任何形式的代码赞助，资金赞助（金额不限）。
+开源许可证，不收取费用, 我们接受任何形式的代码赞助，资金赞助（金额不限）。
 
 FastEM 项目招募
 ---------------
@@ -44,8 +36,6 @@ please donate us, help us improve this project.
 
 请捐赠我们，帮助我们改进这个项目
 
-
-[![donate via alipay](http://www.netroby.com/paygate/alipay/images/donate_alipay.jpg "donate via alipay")](http://www.netroby.com/paygate/alipay/article.donate.php "donate via alipay")
 
 
 [![donate via paypal](https://www.paypal.com/en_US/i/btn/x-click-but04.gif "donate via paypal")](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=netroby%40netroby%2ecom&lc=US&item_name=netroby%2ecom&amount=0%2e99&currency_code=USD&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHostedGuest "donate via paypal")

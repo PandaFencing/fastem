@@ -1,5 +1,5 @@
 <?php
-define('BASE_PATH', realpath(dirname(dirname(__FILE__))));
+define('BASE_PATH', realpath(dirname(__DIR__)));
 
 define('APPLICATION_PATH', BASE_PATH . '/application');
 //define('APPLICATION_ENV', 'production');

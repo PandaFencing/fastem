@@ -1,0 +1,6 @@
+{
+    "require": {
+        "ezyang/htmlpurifier":"dev-master",
+        "zendframework/zendframework":"dev-master"
+    }
+}

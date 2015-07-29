@@ -12,9 +12,10 @@ class Module
 		$l = new ModuleRouteListener();
 		$l->attach($m);
 	}
-	public function _initConfig()
+	
+	public function getConfig()
 	{
-		Zend_Registry::set('config', new Zend_Config($this->getOptions()));
+		return include __DIR__ . '/config/module.config.php';
 	}
 
 	protected function _initDatabases()

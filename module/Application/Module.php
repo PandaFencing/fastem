@@ -1,7 +1,18 @@
 <?php
-class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+
+namespace Application;
+
+
+
+class Module
 {
-	protected function _initConfig()
+	public function onBootstrap (MvcEvent $e)
+	{
+		$m = $e->getApplication()->getEventManager();
+		$l = new ModuleRouteListener();
+		$l->attach($m);
+	}
+	public function _initConfig()
 	{
 		Zend_Registry::set('config', new Zend_Config($this->getOptions()));
 	}

@@ -1,4 +1,6 @@
 <?php 
+namespace Application\Controller;
+
 class IndexController extends Zend_Controller_Action
 {
 

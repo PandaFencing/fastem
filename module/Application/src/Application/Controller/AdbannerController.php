@@ -1,5 +1,11 @@
 <?php
-class AdbannerController extends Zend_Controller_Action {
+
+namespace Application\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+
+class AdbannerController extends AbstractActionController
+{
 	private $_redirector = null;
 	private $_flashMessenger = null;
 	public function init() {

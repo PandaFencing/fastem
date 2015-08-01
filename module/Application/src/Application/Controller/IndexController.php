@@ -1,7 +1,9 @@
 <?php 
 namespace Application\Controller;
 
-class IndexController extends Zend_Controller_Action
+use Zend\Mvc\Controller\AbstractActionController;
+
+class IndexController extends AbstractActionController
 {
 
 	private $_sl = null;

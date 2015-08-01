@@ -1,5 +1,11 @@
 <?php
-class AdzoneController extends Zend_Controller_Action {
+
+namespace Application\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+
+class AdzoneController extends AbstractActionController
+{
 	private $_redirector = null;
 	private $_flashMessenger = null;
 	public function init() {

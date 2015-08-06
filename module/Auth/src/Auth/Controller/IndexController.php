@@ -1,5 +1,9 @@
 <?php
-class Auth_IndexController extends Zend_Controller_Action
+namespace Auth\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+
+class IndexController extends AbstractActionController
 {
 	public function init() {
 		$this->_helper->layout->disableLayout();

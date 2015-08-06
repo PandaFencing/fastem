@@ -1,5 +1,9 @@
 <?php
-class Auth_LogoutController extends Zend_Controller_Action
+namespace Auth\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+
+class LogoutController extends AbstractActionController
 {
 	public function init() {
 		$this->_helper->layout->disableLayout();

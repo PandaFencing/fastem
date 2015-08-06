@@ -1,5 +1,9 @@
 <?php
-class Auth_LoginController extends Zend_Controller_Action
+namespace Auth\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+
+class LoginController extends AbstractActionController
 {
 	private $_redirector = null;
 	private $_flashMessenger = null;

@@ -1,5 +1,9 @@
 <?php
-class ErrorController extends Zend_Controller_Action
+namespace Application\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+
+class ErrorController extends AbstractActionController
 {
 
     public function errorAction()

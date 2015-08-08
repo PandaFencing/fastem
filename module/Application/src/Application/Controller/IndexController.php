@@ -10,7 +10,7 @@ class IndexController extends AbstractActionController
 	private $_redirector = null;
 	private $_flashMessenger = null;
 
-	public function init()
+	public function __construction()
 	{
 		$this->_redirector = $this->_helper->getHelper('Redirector');
 		$this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');

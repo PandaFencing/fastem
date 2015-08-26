@@ -6,14 +6,14 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class AdbannerController extends AbstractActionController
 {
-	private $_redirector = null;
-	private $_flashMessenger = null;
+	private $redirector = null;
+	private $flashMessenger = null;
 	public function init() {
-		$this->_redirector = $this->_helper->getHelper('Redirector');
-		$this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+		$this->redirector = $this->_helper->getHelper('Redirector');
+		$this->flashMessenger = $this->_helper->getHelper('FlashMessenger');
 		$auth = Zend_Auth::getInstance();
 		if (!$auth->hasIdentity()) {
-			$this->_redirector->gotoSimple('index', 'login', 'auth');
+			$this->redirector->gotoSimple('index', 'login', 'auth');
 		}
 	}
 	public function indexAction() {
@@ -38,7 +38,7 @@ class AdbannerController extends AbstractActionController
 		}
 		$adbanner = $db->fetchAll($sql);
 		$this->view->adbanner = $adbanner;
-		$this->view->messages = $this->_flashMessenger->getMessages();
+		$this->view->messages = $this->flashMessenger->getMessages();
 		$this->view->qFilter = $qFilter;
 		$this->view->urlArr = array('action'=>'index', 'controller'=>'adbanner', 'module'=>'default');
 	}
@@ -47,43 +47,43 @@ class AdbannerController extends AbstractActionController
 		$db = Zend_Registry::get('db');
 		$adzone = $db->fetchAll($sql);
 		$this->view->adzone = $adzone;
-		$this->view->messages = $this->_flashMessenger->getMessages();
+		$this->view->messages = $this->flashMessenger->getMessages();
 	}
 	public function saveaddAction() {
-		if (!$this->_request->isPost()) {
-			$this->_redirector->gotoSimple('index');
+		if (!$this->getRequest()->isPost()) {
+			$this->redirector->gotoSimple('index');
 		}
 
-		$name = $this->_getParam('name');
+		$name = $this->params()->fromQuery('name');
 		if (empty($name)) {
-			$this->_flashMessenger->addMessage('广告名不能为空');
-			$this->_redirector->gotoSimple('add');
+			$this->flashMessenger->addMessage('广告名不能为空');
+			$this->redirector->gotoSimple('add');
 		}
-		$image = $this->_getParam('image');
+		$image = $this->params()->fromQuery('image');
 		if (empty($image)) {
-			$this->_flashMessenger->addMessage('广告图片不能为空');
-			$this->_redirector->gotoSimple('add');
+			$this->flashMessenger->addMessage('广告图片不能为空');
+			$this->redirector->gotoSimple('add');
 		}
-		$url = $this->_getParam('url');
+		$url = $this->params()->fromQuery('url');
 		if (empty($url) ) {
-			$this->_flashMessenger->addMessage('广告目标链接不能为空');
-			$this->_redirector->gotoSimple('add');
+			$this->flashMessenger->addMessage('广告目标链接不能为空');
+			$this->redirector->gotoSimple('add');
 		}
-        $zoneid = intval($this->_getParam('zoneid'));
+        $zoneid = intval($this->params()->fromQuery('zoneid'));
 		if (empty($zoneid) || !is_numeric($zoneid)) {
-			$this->_flashMessenger->addMessage('广告位没有选择');
-			$this->_redirector->gotoSimple('add');
+			$this->flashMessenger->addMessage('广告位没有选择');
+			$this->redirector->gotoSimple('add');
 		}
 		$sql = " SELECT width, height FROM adzone WHERE id='". intval($zoneid)  . "';";
 		$db = Zend_Registry::get('db');
 		$arr = $db->fetchRow($sql);
 		$width = $arr['width'];
 		$height = $arr['height'];
-		$tracid = $this->_getParam('tracid');
-		$uptime = strtotime($this->_getParam('uptime'));
-		$downtime = strtotime($this->_getParam('downtime'));
-		$status = intval($this->_getParam('status'));
-		$adtype = intval($this->_getParam('adtype'));
+		$tracid = $this->params()->fromQuery('tracid');
+		$uptime = strtotime($this->params()->fromQuery('uptime'));
+		$downtime = strtotime($this->params()->fromQuery('downtime'));
+		$status = intval($this->params()->fromQuery('status'));
+		$adtype = intval($this->params()->fromQuery('adtype'));
 		$data = array(
 			'name' => $name,
 			'image' => $image,
@@ -99,20 +99,20 @@ class AdbannerController extends AbstractActionController
 		);
 		$db = Zend_Registry::get('db');
 		$db->insert('adbanner', $data);
-		$this->_flashMessenger->addMessage('成功增加一条广告');
-		$this->_redirector->gotoSimple('index');
+		$this->flashMessenger->addMessage('成功增加一条广告');
+		$this->redirector->gotoSimple('index');
 	}
 	public function editAction() {
-		$id = intval($this->_getParam('id')); 
+		$id = intval($this->params()->fromQuery('id')); 
 		if (empty($id)) {
-			$this->_flashMessenger->addMessage('没有提供id');
-			$this->_redirector->gotoSimple('index');
+			$this->flashMessenger->addMessage('没有提供id');
+			$this->redirector->gotoSimple('index');
 		}
 		$db = Zend_Registry::get('db');
 		$adbanner = $db->fetchRow("SELECT * FROM adbanner WHERE id = '" . $id . "';");
 		if (false == $adbanner) {
-			$this->_flashMessenger->addMessage('找不到要编辑的广告');
-			$this->_redirector->gotoSimple('index');
+			$this->flashMessenger->addMessage('找不到要编辑的广告');
+			$this->redirector->gotoSimple('index');
 		}
 		$adzone = $db->fetchAll("SELECT * FROM adzone;");
 
@@ -121,45 +121,45 @@ class AdbannerController extends AbstractActionController
 	}
 	public function saveeditAction() {
 
-		if (!$this->_request->isPost()) {
-			$this->_redirector->gotoSimple('index');
+		if (!$this->getRequest()->isPost()) {
+			$this->redirector->gotoSimple('index');
 		}
 
-		$id = intval($this->_getParam('id')); 
+		$id = intval($this->params()->fromQuery('id')); 
 		if (empty($id)) {
-			$this->_flashMessenger->addMessage('没有提供id');
-			$this->_redirector->gotoSimple('index');
+			$this->flashMessenger->addMessage('没有提供id');
+			$this->redirector->gotoSimple('index');
 		}
-		$name = $this->_getParam('name');
+		$name = $this->params()->fromQuery('name');
 		if (empty($name)) {
-			$this->_flashMessenger->addMessage('广告名不能为空');
-			$this->_redirector->gotoSimple('index');
+			$this->flashMessenger->addMessage('广告名不能为空');
+			$this->redirector->gotoSimple('index');
 		}
-		$image = $this->_getParam('image');
+		$image = $this->params()->fromQuery('image');
 		if (empty($image)) {
-			$this->_flashMessenger->addMessage('广告图片不能为空');
-			$this->_redirector->gotoSimple('index');
+			$this->flashMessenger->addMessage('广告图片不能为空');
+			$this->redirector->gotoSimple('index');
 		}
-		$url = $this->_getParam('url');
+		$url = $this->params()->fromQuery('url');
 		if (empty($url) ) {
-			$this->_flashMessenger->addMessage('广告目标链接不能为空');
-			$this->_redirector->gotoSimple('index');
+			$this->flashMessenger->addMessage('广告目标链接不能为空');
+			$this->redirector->gotoSimple('index');
 		}
-        $zoneid = intval($this->_getParam('zoneid'));
+        $zoneid = intval($this->params()->fromQuery('zoneid'));
 		if (empty($zoneid) || !is_numeric($zoneid)) {
-			$this->_flashMessenger->addMessage('广告位没有选择');
-			$this->_redirector->gotoSimple('index');
+			$this->flashMessenger->addMessage('广告位没有选择');
+			$this->redirector->gotoSimple('index');
 		}
 		$sql = " SELECT width, height FROM adzone WHERE id='". intval($zoneid)  . "';";
 		$db = Zend_Registry::get('db');
 		$arr = $db->fetchRow($sql);
 		$width = $arr['width'];
 		$height = $arr['height'];
-		$tracid = $this->_getParam('tracid');
-		$uptime = strtotime($this->_getParam('uptime'));
-		$downtime = strtotime($this->_getParam('downtime'));
-		$status = intval($this->_getParam('status'));
-		$adtype = intval($this->_getParam('adtype'));
+		$tracid = $this->params()->fromQuery('tracid');
+		$uptime = strtotime($this->params()->fromQuery('uptime'));
+		$downtime = strtotime($this->params()->fromQuery('downtime'));
+		$status = intval($this->params()->fromQuery('status'));
+		$adtype = intval($this->params()->fromQuery('adtype'));
 		$data = array(
 			'name' => $name,
 			'image' => $image,
@@ -175,19 +175,19 @@ class AdbannerController extends AbstractActionController
 		);
 		$db = Zend_Registry::get('db');
 		$db->update('adbanner', $data, 'id = ' . $id);
-		$this->_flashMessenger->addMessage('编辑广告成功');
-		$this->_redirector->gotoSimple('index');
+		$this->flashMessenger->addMessage('编辑广告成功');
+		$this->redirector->gotoSimple('index');
 	}
 	public function deleteAction() {
-		$id = intval($this->_getParam('id'));
+		$id = intval($this->params()->fromQuery('id'));
 		if ($id ==0 ) {
-			$this->_flashMessenger->addMessage('ID 非法');
-			$this->_redirector->gotoSimple('index');
+			$this->flashMessenger->addMessage('ID 非法');
+			$this->redirector->gotoSimple('index');
 		} else {
 			$db = Zend_Registry::get('db');
 			$n = $db->delete('adbanner', 'id = ' . $id);
-			$this->_flashMessenger->addMessage('成功删除一条广告位');
-			$this->_redirector->gotoSimple('index');
+			$this->flashMessenger->addMessage('成功删除一条广告位');
+			$this->redirector->gotoSimple('index');
 		}
 	}
 }

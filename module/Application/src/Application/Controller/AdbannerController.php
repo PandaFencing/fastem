@@ -17,7 +17,7 @@ class AdbannerController extends AbstractActionController
 		}
 	}
 	public function indexAction() {
-		$qFilter = $this->_request->getQuery('filter');
+		$qFilter = $this->params()->fromQuery('filter');
 		if (!empty($qFilter)) {
 			$sCode = array(
 				'declined' => -2,

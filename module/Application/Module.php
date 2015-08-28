@@ -3,6 +3,10 @@
 namespace Application;
 
 
+use Zend\Db\Adapter\Adapter;
+use Zend\Mvc\ModuleRouteListener;
+use Zend\Mvc\MvcEvent;
+
 
 class Module
 {
@@ -17,15 +21,27 @@ class Module
 	{
 		return include __DIR__ . '/config/module.config.php';
 	}
+	public function getServiceConfig()
+	{
+		return [
+			'factories' => [
+				'db' => function ($sm) {
+					$config = $sm->get('config');
+					return new Adapter($config['db']);
+				}
+			]
+		];
+	}
 
-	protected function _initDatabases()
+	public function getAutoloaderConfig()
 	{
-		$this->bootstrap('db');
-		$db = $this->getResource('db');
-		Zend_Registry::set('db', $db);
+		return [
+			'Zend\Loader\StandardAutoloader' => [
+				'namespaces' => [
+					__NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__
+				]
+			]
+		];
 	}
-	protected function _initLayout()
-	{
-		Zend_Layout::startMvc();
-	}
+
 }

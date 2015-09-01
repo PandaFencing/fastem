@@ -2,6 +2,7 @@
     "name":"fastem",
     "require": {
         "ezyang/htmlpurifier":"dev-master",
-        "zendframework/zendframework":"dev-master"
+        "zendframework/zendframework":"dev-master",
+        "netroby/rpcache":"dev-master"
     }
 }

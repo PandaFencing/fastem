@@ -33,7 +33,7 @@ class AdbannerController extends AbstractActionController
                 $status = $sCode[$qFilter];
             }
         }
-        $db = Zend_Registry::get('db');
+        $db = rpcache::get('db');
         $sql = 'SELECT a.*, b.name AS adzone_name FROM adbanner AS a LEFT JOIN adzone AS b ON a.zoneid=b.id ';
         if (isset($status)) {
             $sql .= " WHERE a.status = $status; ";

@@ -6,17 +6,15 @@ use Zend\Mvc\Controller\AbstractActionController;
 class IndexController extends AbstractActionController
 {
 
-    private $_sl = null;
+    private $sl = null;
     private $_redirector = null;
     private $_flashMessenger = null;
 
     public function __construction()
     {
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        if ($this->_hasParam('sl')) {
-            $this->_sl = $this->_getParam('sl');
-            $this->_forward('sload');
+        $sl = $this->params()->fromQuery('sl', '');
+        if ($sl !== '') {
+            $this->forward()->dispatch('index', ['action' => 'sload']);
         }
     }
 
@@ -35,11 +33,11 @@ class IndexController extends AbstractActionController
     {
         $this->_helper->layout->disableLayout();
 
-        if (null != $this->_sl) {
-            if (strstr($this->_sl, ',')) {
-                $ex = explode(',', $this->_sl);
+        if (null != $this->sl) {
+            if (strstr($this->sl, ',')) {
+                $ex = explode(',', $this->sl);
             } else {
-                $ex = array($this->_sl);
+                $ex = array($this->sl);
             }
             $adStr = 'function __g(v){return document.getElementById(v);}';
             $db = Zend_Registry::get('db');
@@ -81,7 +79,7 @@ class IndexController extends AbstractActionController
         }
         $adContent .= " target=\"_blank\">";
         $adContent .= "<img src=\"" . $d['image'] . "\" width=\"" . $d['width'] . "\" height=\"" . $d['height'] . "\" style=\"border:0px\"></a>";
-        $adStr = "__g('_sl_" . $d['zoneid'] . "').innerHTML='" . addslashes($adContent) . "';";
+        $adStr = "__g('sl_" . $d['zoneid'] . "').innerHTML='" . addslashes($adContent) . "';";
         unset($adContent);
         return $adStr;
     }
@@ -89,7 +87,7 @@ class IndexController extends AbstractActionController
     private function _buildIframeLink($d)
     {
         $adContent = "<iframe src=\"" . $d['url'] . "\" width=\"" . $d['width'] . "\" height=\"" . $d['height'] . "\" scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\" border=\"0\" frameborder=\"0\" style=\"border:none\"></iframe>";
-        $adStr = "__g('_sl_" . $d['zoneid'] . "').innerHTML='" . addslashes($adContent) . "';";
+        $adStr = "__g('sl_" . $d['zoneid'] . "').innerHTML='" . addslashes($adContent) . "';";
         unset($adContent);
         return $adStr;
     }

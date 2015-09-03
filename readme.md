@@ -42,6 +42,9 @@ please donate us, help us improve this project.
 
 变更记录
 --------
+### 2015.09.03 ###
+
+转换为ZF2框架
 
 ### 2012.08.29 ###
 

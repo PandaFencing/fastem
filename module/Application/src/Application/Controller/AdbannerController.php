@@ -9,16 +9,6 @@ class AdbannerController extends AbstractActionController
     private $redirector = null;
     private $flashMessenger = null;
 
-    public function init()
-    {
-        $this->redirector = $this->_helper->getHelper('Redirector');
-        $this->flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        $auth = Zend_Auth::getInstance();
-        if (!$auth->hasIdentity()) {
-            $this->redirector->gotoSimple('index', 'login', 'auth');
-        }
-    }
-
     public function indexAction()
     {
         $qFilter = $this->params()->fromQuery('filter');
